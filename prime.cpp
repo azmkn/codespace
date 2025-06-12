@@ -97,7 +97,7 @@ int main(){
       if (torf){
       
         if(p - co >= k){
-      
+          
           if (co != p - 1)cout << "範囲:" << co << " ~ " << p - 1 << " 個数:" << p - co << " 個数(0,4,6):" << c << endl;
           else cout << "範囲:" << co << " 個数:" << 1 << " 個数(0,4,6):" << c << endl;
       

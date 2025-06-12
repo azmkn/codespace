@@ -56,12 +56,9 @@ int main(){
       }
       if (torf) c++;
       if (p%1000==0){
-        double lo=(e*p)/(4*(log(p)-1.08366));
+        double lo=(e*p*((2500000000*log(p*p+1)-5209150000)/(2500000000*log(p*p+1)*log(p*p+1)-5418300000*log(p*p+1)+2935797489)))/(2*((2500000000*log(p)-5209150000)/(2500000000*log(p)*log(p)-5418300000*log(p)+2935797489))*(log(p)-1.08366));
 
-        /*cout << "log: " << lo << endl;
-        cout << "n: " << p << " count: " << c << endl;
-        
-        cout << "count / log = "*/cout << c/lo << endl;
+        cout << c/lo << endl;
       }
 
     }
