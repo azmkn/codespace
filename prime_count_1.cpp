@@ -56,7 +56,7 @@ int main(){
       }
       if (torf) c++;
       if (p%1000==0){
-        double lo=(e*p*((log(p*p+1)-2)/(log(p*p+1)*log(p*p+1)-2*log(p*p+1)+1)))/(2*((log(p)-2)/(log(p)*log(p)-2*log(p)+1))*(log(p)-1.08366));
+        double lo=(e*p*((log(p*p+1)-2)/(log(p*p+1)*log(p*p+1)-2*log(p*p+1)+1)))/(2*((log(p)-2)/(log(p)*log(p)-2*log(p)+1))*(log(p)-1));
 
         cout << c/lo << endl;
       }
