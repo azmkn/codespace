@@ -10,7 +10,7 @@ int main(){
   auto start = high_resolution_clock::now();
 
   ll l, r, p ,c ,m;
-  double ss = 0, sb = 0;
+  double sum = 0;
   double e = 2.718281828459045;
   string s = "";
   cin >> c;
@@ -22,7 +22,7 @@ int main(){
   vec[2] = 6;
   for (ll p1 = l / 10; p1 <= r / 10; p1++){
 
-    for(ll ao = 0; ao <= 9; ao++){
+    for(long long ao = 0; ao <= 9; ao++){
       p = p1 * 10 + ao;
 
       if (l>p || p>r){
@@ -31,8 +31,7 @@ int main(){
 
       }
 
-      ss += ((2500000000*log(p*p+1)-5209150000)/(2500000000*log(p*p+1)*log(p*p+1)-5418300000*log(p*p+1)+2935797489));
-      sb += ((2500000000*log(p)-5209150000)/(2500000000*log(p)*log(p)-5418300000*log(p)+2935797489));
+      sum += ((2500000000*log(p*p+1)-5209150000)/(2500000000*log(p*p+1)*log(p*p+1)-5418300000*log(p*p+1)+2935797489))/((2500000000*log(p)-5209150000)/(2500000000*log(p)*log(p)-5418300000*log(p)+2935797489));
       
       if (not(ao == 4 or ao == 6 or ao == 0)) continue;
       
@@ -61,7 +60,7 @@ int main(){
       }
       if (torf) c++;
       if (p%1000==0){
-        double lo=(e*p*ss)/(2*sb*(log(p)-1.08366));
+        double lo=(e*sum)/(2*(log(p)-1.08366));
 
         cout << c/lo << endl;
       }
