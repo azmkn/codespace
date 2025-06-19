@@ -8,10 +8,7 @@ for i in range(7):
     if i==0 and (j==0 or j==1):
       continue
     c=choice(l)
-    if c==20 or c==16 or c==17:
-      print("\033[31m"+name[c-1]+"　"*(8-len(name[c-1]))+"\033[0m",end=" ")
-    else:
-      print(name[c-1]+"　"*(8-len(name[c-1])),end=" ")
+    print(name[c-1]+"　"*(8-len(name[c-1])),end=" ")
     l.remove(c)
   if i==0:
     print("　"*5,end=" ")
