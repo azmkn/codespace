@@ -1,0 +1,7 @@
+n=int(input())
+s=0
+pi=3.141592653589792
+l=sorted([int(input()) for i in range(n)])[::-1]
+for i in range(n):
+  s+=(-1)**i*l[i]*l[i]
+print(s*pi)
