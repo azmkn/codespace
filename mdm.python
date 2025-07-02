@@ -1,0 +1,10 @@
+def gcd_lcm(a,b):
+    a,b=max(a,b),min(a,b)
+    pro=a*b
+    while b!=0:
+        a,b=b,a%b
+    return (a,pro//a)
+a,b,c=map(int,input().split())
+p,q=gcd_lcm(a,b)
+p2,q2=gcd_lcm(p,c)[0],gcd_lcm(q,c)[1]
+print(a*b*c//p2//q2)
