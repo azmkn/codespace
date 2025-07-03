@@ -4,44 +4,94 @@ using namespace std;
 using namespace std::chrono;
 
 typedef long long ll;
-def is_prime(n, k=5):
-    if n < 2:
-        return False
-    if n == 2 or n == 3:
-        return True
-    if n % 2 == 0:
-        return False
+ll n;
 
-    s = 0
-    d = n - 1
-    while d % 2 == 0:
-        d //= 2
-        s += 1
+double A = 1.0, half_e = 2.718281828459045/2;
 
-    for _ in range(k):
-        a = random.randint(2, n - 2)
-        x = pow(a, d, n)
+int randint(int a, int b) {
+    static std::random_device rd;
+    static std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(a, b);
+    return dis(gen);
+}
 
-        if x == 1 or x == n - 1:
-            continue
-        for _ in range(s - 1):
-            x = pow(x, 2, n)
-            if x == n - 1:
-                break
-        else:
-            return False
+ll sisuu(ll a, ll b, ll c){
+  ll pro = 1;
+  for(ll i=0;i<b;i++){
+    pro*=a;
+    pro%=c;
+  }
+  return pro;
+}
+bool isprime(ll n){
+  if (n < 2){
 
-    return True
-    
-void isprime(ll n, )
+    return false;
 
-ll ro(ll try_n){ 
+  }else if(n < 4){
+
+    return true;
+  
+  }else if (n % 2 == 0){
+
+    return false;
+
+  }
+
+  ll s = 0, d = n - 1;
+  
+  while(d%2==0){
+
+    d/=2;
+    s++;
+
+  } 
+  for (int i=0;i<5;i++){
+    ll a = randint(2,n-2);
+    ll x=sisuu(a, d, n);
+
+    if (x==1 or x==n-1){
+      continue;
+    }
+    bool tf;
+    for (ll j=0;j<s-1;j++){
+      tf=true;
+      x=sisuu(x,2,n);
+      if (x==n-1){
+        tf=false;
+        break;
+      }
+    }
+    if (not tf){
+      return false;
+    }
+  }
+  return true;
+
+}
+double Li(ll x){
+  double result=x/(log(x)-A);
+  return result;
+}
+vector<double> gauss(ll try_n){
+  vector<double> lis;
+  for (ll i=0;i<try_n;i++){
+    if (i<4){
+      lis.push_back(0.0);
+    }else{
+      double y=Li(i)*half_e;
+      lis.push_back(y);
+    }
+  }
+  return lis;
+}
+vector<ll> ro(ll try_n){ 
   
   vector<ll> primes;
   
   ll l=0;
   
-  for (int i=0;i<try_n;i++){
+  for (ll i=0;i<try_n;i++){
 
     if (isprime(i*i+1)){
 
@@ -54,12 +104,29 @@ ll ro(ll try_n){
   }
   return primes;
 }
+vector<ll> pi(ll try_n){
+  vector<ll> primes;
+  ll l=0;
+  for (ll i=0;i<try_n;i++){
+    if (isprime(i)){
+      l++;
+    }
+    primes.push_back(l);
+  }
+  return primes;
+}
 int main(){
-  ll n;
-  double A = 1.0, e = 2.718281828459045/2;
+  cin >> n;
+  auto start = high_resolution_clock::now();
+  vector<ll> RO=ro(n);
+  vector<double> PI = std::vector<double>(pi(n).begin(), pi(n).end());
+  transform(PI.begin(), PI.end(), PI.begin(), [](double y) { return y * half_e; });
+  vector<double> G=gauss(n);
   auto end = high_resolution_clock::now();
   
   auto duration = duration_cast<milliseconds>(end - start).count();
   cout << "Execution Time: " << duration << "ms" << endl;
-
+  for(int i=0;i<n;i++){
+    cout << PI[i]-RO[i] << endl;
+  }
 }
