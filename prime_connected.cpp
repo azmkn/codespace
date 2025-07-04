@@ -7,8 +7,6 @@ typedef long long ll;
 
 int main(){
 
-  auto start = high_resolution_clock::now();
-
   ll k, l, r, p, c = 0, cp = 0, m, c4 = 0, c6 = 0, c0 = 0;
   string s = "";
 
@@ -20,7 +18,7 @@ int main(){
   vec[2] = 6;
 
   ll co = l;
-
+  auto start = high_resolution_clock::now();
   if (l <= 2){
 
     co = 3;

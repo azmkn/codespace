@@ -7,8 +7,6 @@ typedef long long ll;
 
 int main(){
 
-  auto start = high_resolution_clock::now();
-
   ll l, r, p ,c ,m;
   double ss = 0, sb = 0;
   double e = 2.718281828459045;
@@ -20,6 +18,8 @@ int main(){
   vec[0] = 0;
   vec[1] = 4;
   vec[2] = 6;
+  auto start = high_resolution_clock::now();
+
   for (ll p1 = l / 10; p1 <= r / 10; p1++){
 
     for(ll ao = 0; ao <= 9; ao++){

@@ -75,7 +75,7 @@ double Li(ll x){
 }
 vector<double> gauss(ll try_n){
   vector<double> lis;
-  for (ll i=0;i<try_n;i++){
+  for (ll i=1;i<=try_n;i++){
     if (i<4){
       lis.push_back(0.0);
     }else{
@@ -91,7 +91,7 @@ vector<double> ro(ll try_n){
   
   ll l=0;
   
-  for (ll i=1;i<try_n;i++){
+  for (ll i=1;i<=try_n;i++){
 
     if (isprime(i*i+1)){
 
@@ -107,7 +107,7 @@ vector<double> ro(ll try_n){
 vector<ll> pi(ll try_n){
   vector<ll> primes;
   ll l=0;
-  for (ll i=0;i<try_n;i++){
+  for (ll i=1;i<=try_n;i++){
     if (isprime(i)){
       l++;
     }
@@ -117,16 +117,18 @@ vector<ll> pi(ll try_n){
 }
 int main(){
   cin >> n;
+  cout << fixed << setprecision(15) << endl;
   auto start = high_resolution_clock::now();
   vector<double> RO=ro(n);
-  vector<double> PI = std::vector<double>(pi(n).begin(), pi(n).end());
-  transform(PI.begin(), PI.end(), PI.begin(), [](double y) { return y * half_e; });
+  //vector<double> PI = std::vector<double>(pi(n).begin(), pi(n).end());
+  //transform(PI.begin(), PI.end(), PI.begin(), [](double y) { return y * half_e; });
   vector<double> G=gauss(n);
+  for(int i=1;i<=n;i++){
+    cout << RO[i] << endl;
+  }
   auto end = high_resolution_clock::now();
   
   auto duration = duration_cast<milliseconds>(end - start).count();
   cout << "Execution Time: " << duration << "ms" << endl;
-  for(int i=0;i<n;i++){
-    cout << PI[i]-RO[i] << endl;
-  }
+  
 }
