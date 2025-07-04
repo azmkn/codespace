@@ -85,13 +85,13 @@ vector<double> gauss(ll try_n){
   }
   return lis;
 }
-vector<ll> ro(ll try_n){ 
+vector<double> ro(ll try_n){ 
   
-  vector<ll> primes;
+  vector<double> primes;
   
   ll l=0;
   
-  for (ll i=0;i<try_n;i++){
+  for (ll i=1;i<try_n;i++){
 
     if (isprime(i*i+1)){
 
@@ -99,7 +99,7 @@ vector<ll> ro(ll try_n){
 
     }
 
-    primes.push_back(l * ((log(i) - 1) / (log(i)*log(i)))/((log(i * i + 1) - 1) / (log(i * i + 1)*log(i * i + 1))));
+    primes.push_back(l * ((log(i) - 1.0) / (log(i)*log(i)))/((log(i * i + 1) - 1.0) / (log(i * i + 1)*log(i * i + 1))));
 
   }
   return primes;
@@ -118,7 +118,7 @@ vector<ll> pi(ll try_n){
 int main(){
   cin >> n;
   auto start = high_resolution_clock::now();
-  vector<ll> RO=ro(n);
+  vector<double> RO=ro(n);
   vector<double> PI = std::vector<double>(pi(n).begin(), pi(n).end());
   transform(PI.begin(), PI.end(), PI.begin(), [](double y) { return y * half_e; });
   vector<double> G=gauss(n);
