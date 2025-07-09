@@ -55,19 +55,16 @@ bool isprime(ll n){
     }
     bool tf;
     for (ll j=0;j<s-1;j++){
-      tf=true;
       x=sisuu(x,2,n);
       if (x==n-1){
-        tf=false;
         break;
       }
-    }
-    if (not tf){
-      return false;
+      if (j==s-2){
+        return false;
+      }
     }
   }
   return true;
-
 }
 double Li(ll x){
   double result=x/(log(x)-A);
@@ -121,11 +118,15 @@ int main(){
   cout << fixed << setprecision(15) << endl;
   auto start = high_resolution_clock::now();
   vector<double> RO=ro(n);
-  vector<double> PI = std::vector<double>(pi(n).begin(), pi(n).end());
-  //transform(PI.begin(), PI.end(), PI.begin(), [](double y) { return y * half_e; });
+  vector<ll> PI = pi(n);
+  transform(PI.begin(), PI.end(), PI.begin(), [](double y) { return y * half_e; });
+  for (const long long& i:PI){
+    cout << i << " ";
+  }
+  cout << endl;
   vector<double> G=gauss(n);
   for(int i=1;i<=n;i++){
-    cout << RO[i] << endl;
+    cout << PI[i]-RO[i] << endl;
   }
   auto end = high_resolution_clock::now();
   
