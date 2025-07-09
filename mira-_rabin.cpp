@@ -23,6 +23,16 @@ ll sisuu(ll a, ll b, ll c){
   }
   return pro;
 }
+bool check(ll a,ll d,ll n,ll s){
+  ll x=sisuu(a,d,n);
+  if (x==1 or x==n-1)return true;
+  for (int i=0;i<s-1;i++){
+    x=(x*x)%n;
+    if (x==n-1)return true;
+  }
+  return false;
+}
+
 bool isprime(ll n){
   if (n < 2){
 
@@ -45,27 +55,23 @@ bool isprime(ll n){
     d/=2;
     s++;
 
-  } 
-  for (int i=0;i<5;i++){
-    ll a = randint(2,n-2);
-    ll x=sisuu(a, d, n);
+  }
 
-    if (x==1 or x==n-1){
-      continue;
-    }
-    bool tf;
-    for (ll j=0;j<s-1;j++){
-      x=sisuu(x,2,n);
-      if (x==n-1){
-        break;
-      }
-      if (j==s-2){
-        return false;
-      }
-    }
+  vector<ll> l;
+  l.push_back(2);
+  l.push_back(3);
+  l.push_back(5);
+  l.push_back(7);
+  l.push_back(11);
+  l.push_back(13);
+  l.push_back(17);
+  for (const long long& a:l){
+    if (a%n==0)continue;
+    if (not check(a,d,n,s))return false;
   }
   return true;
 }
+
 double Li(ll x){
   double result=x/(log(x)-A);
   return result;
