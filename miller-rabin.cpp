@@ -107,13 +107,13 @@ vector<double> ro(ll try_n){
   }
   return primes;
 }
-vector<ll> pi(ll try_n){
-  vector<ll> primes;
+vector<double> pi(ll try_n){
+  vector<double> primes;
 
-  ll l=0;
+  double l=0;
   for (ll i=1;i<=try_n;i++){
     if (isprime(i)){
-      l++;
+      l+=1;
     }
     primes.push_back(l);
   }
@@ -124,12 +124,8 @@ int main(){
   cout << fixed << setprecision(15) << endl;
   auto start = high_resolution_clock::now();
   vector<double> RO=ro(n);
-  vector<ll> PI = pi(n);
+  vector<double> PI = pi(n);
   transform(PI.begin(), PI.end(), PI.begin(), [](double y) { return y * half_e; });
-  for (const long long& i:PI){
-    cout << i << " ";
-  }
-  cout << endl;
   vector<double> G=gauss(n);
   for(int i=1;i<=n;i++){
     cout << PI[i]-RO[i] << endl;

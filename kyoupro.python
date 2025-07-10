@@ -1,7 +1,39 @@
-n=int(input())
-s=0
-pi=3.141592653589792
-l=sorted([int(input()) for i in range(n)])[::-1]
-for i in range(n):
-  s+=(-1)**i*l[i]*l[i]
-print(s*pi)
+import random
+def miller_rabin(n: int) -> bool:
+    if n < 2:
+        return False
+    for p in (2, 3):
+        if n == p:
+            return True
+    if n % 2 == 0:
+        return False
+
+    d, s = n - 1, 0
+    while d & 1 == 0:
+        d >>= 1
+        s += 1
+
+    bases = [2,3,5,7,11,13,17]
+
+    def check(a: int) -> bool:
+        x = pow(a, d, n)
+        if x == 1 or x == n - 1:
+            return True
+        for _ in range(s - 1):
+            x = (x * x) % n
+            if x == n - 1:
+                return True
+        return False
+
+    for a in bases:
+        if a % n == 0:
+            continue
+        if not check(a):
+            return False
+    return True
+
+
+n_limit = 20
+primes = []
+primes_n_squared_plus_1 = []
+c=0
