@@ -36,4 +36,4 @@ def miller_rabin(n: int) -> bool:
 n_limit = 20
 primes = []
 primes_n_squared_plus_1 = []
-c=0
+c = 0
