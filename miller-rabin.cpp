@@ -128,6 +128,7 @@ int main(){
   transform(PI.begin(), PI.end(), PI.begin(), [](double y) { return y * half_e; });
   vector<double> G=gauss(n);
   for(int i=1;i<=n;i++){
+    cout << PI[i] << " " << RO[i] << endl;
     cout << PI[i]-RO[i] << endl;
   }
   auto end = high_resolution_clock::now();

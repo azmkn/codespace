@@ -1,6 +1,6 @@
 from random import randint
 d=["ABC","ARC","AGC"]
-l=[413,201,72]
+l=[414,201,72]
 s=sum(l)
 c=randint(1,s)
 for i in range(1,4):
