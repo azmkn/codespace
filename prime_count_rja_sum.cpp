@@ -63,7 +63,7 @@ int main(){
       if (p%1000==0){
         double lo=(e*p*ss)/(2*sb*(log(p)-1.08366));
 
-        cout << c/lo << endl;
+        cout << c-lo << endl;
       }
 
     }
