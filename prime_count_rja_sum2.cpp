@@ -1,3 +1,4 @@
+//prime_count_rja_sum2.cpp
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -91,3 +92,4 @@ int main() {
     auto duration = duration_cast<milliseconds>(end - start).count();
     cout << "Execution Time: " << duration << "ms" << endl;
 }
+//prime_count_rja_sum2.cpp
