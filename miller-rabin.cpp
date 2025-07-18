@@ -57,14 +57,7 @@ bool isprime(ll n){
 
   }
 
-  vector<ll> l;
-  l.push_back(2);
-  l.push_back(3);
-  l.push_back(5);
-  l.push_back(7);
-  l.push_back(11);
-  l.push_back(13);
-  l.push_back(17);
+  vector<ll> l = {2, 3, 5, 7, 11, 13, 17};
   for (const long long& a:l){
     if (a%n==0)continue;
     if (not check(a,d,n,s))return false;
