@@ -21,11 +21,12 @@ fn main(){
         mut n:i128,
     }
     let mut c=0;
-loop{
-    if ! B!(n){
-        println!("No n:{} m:{} c:{}",n,m,c);
-    }else{
-        
+    loop{
+        if ! B!(n){
+            println!("No n:{} m:{} c:{}",n,m,c);
+        }else{
+            println!("Yes n:{} m:{} c:{}",n,m,c);
+        }
+        n=f!(n);
     }
-}
 }
