@@ -1,0 +1,31 @@
+macro_rules! f {
+    ($x:expr) => ($x+10);
+}
+macro_rules! L{
+    ($x:expr)=>($x*$x+1);
+}
+macro_rules! B{
+    ($x:expr)=>{
+        let m=$x*$x+1;
+        for i in 1..$x/4{
+            let p=4*i+1;
+            if $x%p==0{
+                return false;
+            }
+        }
+        return true;
+    }
+}
+fn main(){
+    proconio::input!{
+        mut n:i128,
+    }
+    let mut c=0;
+loop{
+    if ! B!(n){
+        println!("No n:{} m:{} c:{}",n,m,c);
+    }else{
+        
+    }
+}
+}
