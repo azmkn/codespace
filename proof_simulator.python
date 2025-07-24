@@ -1,0 +1,18 @@
+def f(n):
+    return n+10
+def L(n):
+    return n*n+1
+def B(n):
+    m=n*n+1
+    for i in range(5,n+3,4):
+        if m%i==0:
+            return False
+    return True
+n=int(input())
+c=0
+while True:
+    if B(n):
+        print("Yes n:{} m:{} c:{}",n,L(n),c);
+    else:
+        print("No n:{} m:{} c:{}",n,L(n),c);
+    n=f(n)
