@@ -12,6 +12,7 @@ n=int(input())
 c=0
 while True:
     if B(n):
+        c+=1
         print("Yes n:"+str(n)+" m:"+str(L(n))+" c:"+str(c))
     else:
         print("No n:"+str(n)+" m:"+str(L(n))+" c:"+str(c))
