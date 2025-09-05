@@ -120,6 +120,7 @@ vector<double> pi(ll try_n) {
 
 // メイン関数
 int main() {
+
     // 入力の受け取り
     cin >> n;
     cout << fixed << setprecision(15) << endl;
