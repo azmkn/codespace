@@ -1,0 +1,10 @@
+from scipy.special import log_integral
+from math import log
+def li(x):
+    return log_integral(x)-log_integral(2)
+def x_logx(x):
+    return x/log(x)
+def deviation_approximation(x,y):#近似値,実際値
+    return (x-y)/y
+print(deviation_approximation(li(10**10),455052511))
+print(deviation_approximation(x_logx(10**10),455052511))
