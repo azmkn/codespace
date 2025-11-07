@@ -1,0 +1,21 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Excelファイルを読み込み
+df = pd.read_excel("data2.xlsx")
+
+# データの確認
+print(df.head())
+
+# 抵抗値Rと消費電力Pをプロット
+plt.figure(figsize=(8,5))
+plt.plot(df["R (Ω)"], df["P (W)"], marker='o', color='blue', label='P vs R')
+
+# グラフの装飾
+plt.title("抵抗値 R に対する消費電力 P")
+plt.xlabel("抵抗値 R [Ω]")
+plt.ylabel("消費電力 P [W]")
+plt.grid(True)
+plt.legend()
+plt.tight_layout()
+plt.show()

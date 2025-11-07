@@ -1,39 +1,10 @@
-import random
-def miller_rabin(n: int) -> bool:
-    if n < 2:
-        return False
-    for p in (2, 3):
-        if n == p:
-            return True
-    if n % 2 == 0:
-        return False
-
-    d, s = n - 1, 0
-    while d & 1 == 0:
-        d >>= 1
-        s += 1
-
-    bases = [2,3,5,7,11,13,17]
-
-    def check(a: int) -> bool:
-        x = pow(a, d, n)
-        if x == 1 or x == n - 1:
-            return True
-        for _ in range(s - 1):
-            x = (x * x) % n
-            if x == n - 1:
-                return True
-        return False
-
-    for a in bases:
-        if a % n == 0:
-            continue
-        if not check(a):
-            return False
-    return True
-
-
-n_limit = 20
-primes = []
-primes_n_squared_plus_1 = []
-c = 0
+from scipy.special import log_integral
+from math import log
+def li(x):
+    return log_integral(x)-log_integral(2)
+def x_logx(x):
+    return x/log(x)
+def deviation_approximation(x,y):#近似値,実際値
+    return (x-y)/y
+print(deviation_approximation(li(10**10),455052511))
+print(deviation_approximation(x_logx(10**10),455052511))

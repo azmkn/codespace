@@ -1,44 +1,88 @@
 from random import choice
-l = [i for i in range(1, 41)]
+n=int(input())
+attendance_number_start=int(input())
+h,w=map(int,input().split())
+grid=[]
+for i in range(h):
+  grid.append((list(input())))
+l = [i for i in range(1, n+1)]
 no=sorted([])
-name = ["1 .東貫太","2 .衛藤凛","3 .小幡桜介","4 .笠木陽希","5 .木崎公亮","6 .佐藤大悟","7 .佐藤葉緒","8 .竹尾航士郎","9 .玉井こよみ","10.利光咲生菜","11.又野真穂","12.光増耕太郎","13.三戸颯馬","14.宮田果歩","15.麻生侑愛","16.上野瑛人","17.上野峻","18.甲斐飛登","19.角田佐衣","20.北山昊樹","21.小出理央","22.椎原悠貴","23.重石優心","24.篠崎未來","25.首藤晴","26.造士桜","27.田北海翔","28.立和田悠人","29.中田拓臣","30.中野翔太","31.西村周悟","32.野仲勇希","33.濵永真仁","34.姫野愛菜","35.廣田瑠亜","36.堀田一彰","37.前村尚","38.松尾優汰","39.三浦琉生","40.吉田莉里那"]
-for i in range(len(no)):
+name = input().split()
+max_name_length=max([len(i)for i in name])
+for i in range(len(name)):
+  if i<9:p=str(i+attendance_number_start)+" "
+  else:p=str(i+attendance_number_start)
+  name[i]=p+"."+name[i]+"  "*(max_name_length-len(name[i]))
+"""for i in range(len(no)):
   l.remove(no[i])
   p=no[i]
   no[i]=name[p-1]
 for i in range(10-len(no)):
   no.append("o")
-seki=[["o" for i in range(6)]for i in range(7)]
-seki[0][0]="             "
-seki[0][5]=""
 kotei=[]
 for i in range(len(kotei)):
-  seki[0][i+1]=name[kotei[i]-1]+"  "*(8-len(name[kotei[i]-1]))
+  grid[0][i+1]=name[kotei[i]-1]+"  "*(8-len(name[kotei[i]-1]))
   l.remove(kotei[i])
-nk=[k for k in range(1,11-len(kotei))]
+nk=[k for k in range(1,11-len(kotei))]"""
 tf=True
-for i in range(2):
-  for j in range(6):
-    if i == 0 and (j == 0 or j == 5) or seki[i][j]!="o":
+"""for i in range(2):
+  for j in range(w):
+    if i == 0 and (j == 0 or j == 5) or grid[i][j]!="o":
       continue
     c = choice(nk)
-    seki[i][j]=no[c-1]+"  "*(8-len(no[c-1]))
-    nk.remove(c)
-for i in range(0,7):
-  for j in range(0,6):
-    if i == 0 and (j == 0 or j == 5):
+    grid[i][j]=no[c-1]+"  "*(8-len(no[c-1]))
+    nk.remove(c)"""
+for i in range(0,h):
+  for j in range(0,w):
+    if grid[i][j]=="x":
+      grid[i][j]="   "+"  "*max_name_length
       continue
     if len(l)==0:
       tf=False
       break
     c = choice(l)
-    if i<2: 
-      if seki[i][j][0]!="o":
-        continue
-    seki[i][j]=name[c - 1] + "  " * (8 - len(name[c - 1]))
-    l.remove(c)
+    if grid[i][j]=="o":
+      grid[i][j]=name[c - 1]
+      l.remove(c)
   if not tf:
     break
-for i in range(7):
-  seki[i]=" ".join(seki[i])
-print("\n".join(seki))
+print()
+for i in range(h):
+  grid[i]=" ".join(grid[i])
+print("\n".join(grid))
+"""
+例
+SS
+14
+1
+4 4
+oooo
+oooo
+oooo
+xoox
+東貫太 衛藤凛 小幡桜介 笠木陽希 木崎公亮 佐藤大悟 佐藤葉緒 竹尾航士郎 玉井こよみ 利光咲生菜 又野真穂 光増耕太郎 三戸颯馬 宮田果歩
+
+2-8
+40
+1
+7 6
+xoooox
+oooooo
+oooooo
+oooooo
+oooooo
+oooooo
+oooooo
+東貫太 衛藤凛 小幡桜介 笠木陽希 木崎公亮 佐藤大悟 佐藤葉緒 竹尾航士郎 玉井こよみ 利光咲生菜 又野真穂 光増耕太郎 三戸颯馬 宮田果歩 麻生侑愛 上野瑛人 上野峻 甲斐飛登 角田佐衣 北山昊樹 小出理央 椎原悠貴 重石優心 篠崎未來 首藤晴 造士桜 田北海翔 立和田悠人 中田拓臣 中野翔太 西村周悟 野仲勇希 濵永真仁 姫野愛菜 廣田瑠亜 堀田一彰 前村尚 松尾優汰 三浦琉生 吉田莉里那
+
+MS
+26
+15
+5 6
+xoooox
+oooooo
+oooooo
+oooooo
+xoooox
+麻生侑愛 上野瑛人 上野峻 甲斐飛登 角田佐衣 北山昊樹 小出理央 椎原悠貴 重石優心 篠崎未來 首藤晴 造士桜 田北海翔 立和田悠人 中田拓臣 中野翔太 西村周悟 野仲勇希 濵永真仁 姫野愛菜 廣田瑠亜 堀田一彰 前村尚 松尾優汰 三浦琉生 吉田莉里那
+"""
