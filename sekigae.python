@@ -10,7 +10,7 @@ no=sorted([])
 name = input().split()
 max_name_length=max([len(i)for i in name])
 for i in range(len(name)):
-  if i<9:p=str(i+attendance_number_start)+" "
+  if i+attendance_number_start<9:p=str(i+attendance_number_start)+" "
   else:p=str(i+attendance_number_start)
   name[i]=p+"."+name[i]+"  "*(max_name_length-len(name[i]))
 """for i in range(len(no)):
