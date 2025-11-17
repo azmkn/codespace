@@ -44,7 +44,7 @@ for i in range(0,h):
       break
     c = choice(l)
     if grid[i][j]=="o":
-      grid[i][j]=str(c)+("  " if c+attendance_number_start<=9 else " ")#name[c - 1]
+      grid[i][j]=str(c)+("  " if c+attendance_number_start<=10 else " ")#name[c - 1]
       l.remove(c)
   if not tf:
     break

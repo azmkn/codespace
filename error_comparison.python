@@ -1,0 +1,10 @@
+from scipy.special import expi
+from math import log
+def Li(x):
+    return expi(log(x))-expi(log(2))
+def x_logx(x):
+    return x/log(x)
+def deviation_approximation(x,y):#近似値,実際値
+    return (y-x)/x
+print(f"{deviation_approximation(Li(10**10),455052511):.20f}")
+print(f"{deviation_approximation(x_logx(10**10),455052511):.20f}")
