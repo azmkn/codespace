@@ -1,0 +1,211 @@
+l=[]
+def Molecular_Weight_Calculation(chemical_formula):
+    tf=True
+    weight=0
+    weight_part=0
+    for i in range(len(chemical_formula)):
+        c=""
+        if chemical_formula[i]=="(":
+            tf=False
+        elif chemical_formula[i]==")":
+            tf=True
+            k=1
+            while i+k<len(chemical_formula) and 65>ord(chemical_formula[i+k]):
+                c+=chemical_formula[i+k]
+                k+=1
+            if c=="":
+                c="1"
+            weight+=weight_part*int(c)
+            weight_part=0
+        if 65<=ord(chemical_formula[i])<=90:
+            if i!=len(chemical_formula)-1:
+                if 97<=ord(chemical_formula[i+1])<=122:
+                    k=2
+                    while i+k<len(chemical_formula) and 48<=ord(chemical_formula[i+k])<=57:
+                        c+=chemical_formula[i+k]
+                        k+=1
+                    if c=="":
+                        c="1"
+                    if tf:
+                        weight+=element_dictionary_weight[chemical_formula[i:i+2]]*int(c)
+                    else:
+                        weight_part+=element_dictionary_weight[chemical_formula[i:i+2]]*int(c)
+                else:
+                    k=1
+                    while i+k<len(chemical_formula) and 48<=ord(chemical_formula[i+k])<=57:
+                        c+=chemical_formula[i+k]
+                        k+=1
+                    if c=="":
+                        c="1"
+                    if tf:
+                        weight+=element_dictionary_weight[chemical_formula[i]]*int(c)
+                    else:
+                        weight_part+=element_dictionary_weight[chemical_formula[i]]*int(c)
+            else:
+                weight+=element_dictionary_weight[chemical_formula[i]]
+        else:
+            continue
+    return weight
+element_dictionary_weight={
+    "H":1,
+    "He":4,
+    "Li":7,
+    "Be":9,
+    "B":11,
+    "C":12,
+    "N":14,
+    "O":16,
+    "F":19,
+    "Ne":20,
+    "Na":23,
+    "Mg":24,
+    "Al":27,
+    "Si":28,
+    "P":31,
+    "S":32,
+    "Cl":35.5,
+    "Ar":40,
+    "K":39,
+    "Ca":40,
+    "Sc":45,
+    "Ti":48,
+    "V":51,
+    "Cr":52,
+    "Mn":55,
+    "Fe":56,
+    "Co":59,
+    "Ni":59,
+    "Cu":63.5,
+    "Zn":65,
+    "Ga":70,
+    "Ge":73,
+    "As":75,
+    "Se":79,
+    "Br":80,
+    "Kr":84,
+    "Rb":85.5,
+    "Sr":88,
+    "Y":89,
+    "Zr":91,
+    "Nb":93,
+    "Mo":96,
+    "Tc":99,
+    "Ru":101,
+    "Rh":103,
+    "Pd":106,
+    "Ag":108,
+    "Cd":112,
+    "In":115,
+    "Sn":119,
+    "Sb":122,
+    "Te":128,
+    "I":127,
+    "Xe":131,
+    "Cs":133,
+    "Ba":137,
+    "La":139,
+    "Ce":140,
+    "Pr":141,
+    "Nd":144,
+    "Pm":145,
+    "Sm":150,
+    "Eu":152,
+    "Gd":157,
+    "Tb":159,
+    "Dy":162.5,
+    "Ho":165,
+    "Er":167,
+    "Tm":169,
+    "Yb":173,
+    "Lu":175,
+    "Hf":178.5,
+    "Ta":181,
+    "W":184,
+    "Re":186,
+    "Os":190,
+    "Ir":192,
+    "Pt":195,
+    "Au":197,
+    "Hg":201,
+    "Tl":204,
+    "Pb":207,
+    "Bi":209,
+    "Po":210,
+    "At":210,
+    "Rn":222,
+    "Fr":223,
+    "Ra":226,
+    "Ac":227,
+    "Th":232,
+    "Pa":231,
+    "U":238,
+    "Np":237,
+    "Pu":239,
+    "Am":243,
+    "Cm":247,
+    "Bk":247,
+    "Cf":252,
+    "Es":252,
+    "Fm":257,
+    "Md":258,
+    "No":259,
+    "Lr":262,
+    "Rf":267,
+    "Db":268,
+    "Sg":271,
+    "Bh":272,
+    "Hs":277,
+    "Mt":276,
+    "Ds":281,
+    "Rg":280,
+    "Cn":285,
+    "Nh":278,
+    "Fl":289,
+    "Mc":289,
+    "Lv":293,
+    "Ts":293,
+    "Og":294
+}
+formula=input("化学式を入力して下さい:")
+q=int(input("物質量なら1,質量なら2,分子数なら3,体積なら4,終了なら0を入力してください:"))
+if q==0:
+    exit()
+value=float(input("値を数値のみ入力してください:"))
+tf_gas=input("気体の場合は1,液体または固体の場合は0を入力してください:")
+density=float(input("密度をg/cm^3で数値のみ入力してください:"))
+if q==2:
+    mol=value/Molecular_Weight_Calculation(formula)
+if q==3:
+    mol=value/6.02*10**-23
+if q==4:
+    if tf_gas==1:
+        mol=value/22.4
+    else:
+        mol=value*density/Molecular_Weight_Calculation(formula)
+if q==1:
+    mol=value
+amount=mol*6.02
+amount_exponent=23
+gram=mol*Molecular_Weight_Calculation(formula)
+if amount>1:
+    while amount>10:
+        amount/=10
+        amount_exponent+=1
+else:
+    while amount<1:
+        amount*=10
+        amount_exponent-=1
+volume_solid_or_liquid=gram/density
+volume_gas=22.4*mol
+print("物質量:"+str(mol)+"mol")
+if amount_exponent==0:
+    print("分子数:"+str(amount))
+elif amount_exponent==1:
+    print("分子数:"+str(amount)+"*10")
+else:
+    print("分子数:"+str(amount)+"*10^"+str(amount_exponent))
+print("質量:"+str(gram)+"g")
+if tf_gas==1:
+    print("体積:"+str(volume_gas)+"L")
+else:
+    print("体積:"+str(volume_solid_or_liquid)+"cm^3")
