@@ -167,6 +167,7 @@ element_dictionary_weight={
     "Og":294
 }
 formula=input("化学式を入力して下さい:")
+print("分子量:"+str(Molecular_Weight_Calculation(formula)))
 q=int(input("物質量なら1,質量なら2,分子数なら3,体積なら4,終了なら0を入力してください:"))
 if q==0:
     exit()
