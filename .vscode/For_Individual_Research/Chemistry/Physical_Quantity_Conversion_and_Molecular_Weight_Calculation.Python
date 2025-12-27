@@ -1,4 +1,17 @@
 l=[]
+import math
+def round_sigdig(val: float, sigdig: int):
+    _sigdig = sigdig - 1
+    def _round_sigdig(val):
+        if isinstance(val, list):
+            return list(map(_round_sigdig, val))
+        d = int(-(math.floor(math.log10(abs(val)))-_sigdig))
+        val = round(val, d)
+        if val >= 10**(_sigdig):
+            return int(val)
+        else:
+            return val
+    return _round_sigdig(val)
 def Molecular_Weight_Calculation(chemical_formula):
     tf=True
     weight=0
@@ -168,12 +181,14 @@ element_dictionary_weight={
 }
 formula=input("化学式を入力して下さい:")
 print("分子量:"+str(Molecular_Weight_Calculation(formula)))
+significant_figures_number=int(input("有効数字の桁数を入力してください:"))
 q=int(input("物質量なら1,質量なら2,分子数なら3,体積なら4,終了なら0を入力してください:"))
-if q==0:
+if q==0 or q>4:
     exit()
 value=float(input("値を数値のみ入力してください:"))
-tf_gas=input("気体の場合は1,液体または固体の場合は0を入力してください:")
-density=float(input("密度をg/cm^3で数値のみ入力してください:"))
+tf_gas=int(input("気体の場合は1,液体または固体の場合は0を入力してください:"))
+if not tf_gas:
+    density=float(input("密度をg/cm^3で数値のみ入力してください:"))
 if q==2:
     mol=value/Molecular_Weight_Calculation(formula)
 if q==3:
@@ -188,6 +203,7 @@ if q==1:
 amount=mol*6.02
 amount_exponent=23
 gram=mol*Molecular_Weight_Calculation(formula)
+gram_exponent=0
 if amount>1:
     while amount>10:
         amount/=10
@@ -198,15 +214,70 @@ else:
         amount_exponent-=1
 volume_solid_or_liquid=gram/density
 volume_gas=22.4*mol
-print("物質量:"+str(mol)+"mol")
-if amount_exponent==0:
-    print("分子数:"+str(amount))
+volume_gas_exponent=0
+volume_solid_or_liquid_exponent=0
+mol_exponent=0
+if mol>1:
+    while mol>10:
+        mol/=10
+        mol_exponent+=1
+else:
+    while mol<1:
+        mol*=10
+        mol_exponent-=1
+if gram>1:
+    while gram>10:
+        gram/=10
+        gram_exponent+=1
+else:
+    while gram<1:
+        gram*=10
+        gram_exponent-=1
+if volume_solid_or_liquid>1:
+    while volume_solid_or_liquid>10:
+        volume_solid_or_liquid/=10
+        volume_solid_or_liquid_exponent+=1
+else:
+    while volume_solid_or_liquid<1:
+        volume_solid_or_liquid*=10
+        volume_solid_or_liquid_exponent-=1
+if volume_gas>1:
+    while volume_gas>10:
+        volume_gas/=10
+        volume_gas_exponent+=1
+else:
+    while volume_gas<1:
+        volume_gas*=10
+        volume_gas_exponent-=1
+if significant_figures_number-1>=mol_exponent>=0:
+    print("物質量:"+str(round_sigdig(mol*10**mol_exponent,significant_figures_number))+"mol")
+elif mol_exponent==1:
+    print("物質量:"+str(f"{mol:.{significant_figures_number-1}f}")+"*10mol")
+else:
+    print("物質量:"+str(f"{mol:.{significant_figures_number-1}f}")+"*10^"+str(mol_exponent))
+if significant_figures_number-1>=amount_exponent>=0:
+    print("分子数:"+str(round_sigdig(amount*10**amount_exponent,significant_figures_number)))
 elif amount_exponent==1:
-    print("分子数:"+str(amount)+"*10")
+    print("分子数:"+str(f"{amount:.{significant_figures_number-1}f}")+"*10")
 else:
-    print("分子数:"+str(amount)+"*10^"+str(amount_exponent))
-print("質量:"+str(gram)+"g")
+    print("分子数:"+str(f"{amount:.{significant_figures_number-1}f}")+"*10^"+str(amount_exponent))
+if significant_figures_number-1>=gram_exponent>=0:
+    print("質量:"+str(round_sigdig(gram*10**gram_exponent,significant_figures_number))+"g")
+elif gram_exponent==1:
+    print("質量:"+str(f"{gram:.{significant_figures_number-1}f}")+"*10g")
+else:
+    print("質量:"+str(f"{gram:.{significant_figures_number-1}f}")+"*10^"+str(gram_exponent))
 if tf_gas==1:
-    print("体積:"+str(volume_gas)+"L")
+    if significant_figures_number-1>=volume_gas_exponent>=0:
+        print("体積:"+str(round_sigdig(volume_gas*10**volume_gas_exponent,significant_figures_number))+"L")
+    elif volume_gas_exponent==1:
+        print("体積:"+str(f"{volume_gas:.{significant_figures_number-1}f}")+"*10L")
+    else:
+        print("体積:"+str(f"{volume_gas:.{significant_figures_number-1}f}")+"*10^"+str(volume_gas_exponent))
 else:
-    print("体積:"+str(volume_solid_or_liquid)+"cm^3")
+    if significant_figures_number-1>=volume_solid_or_liquid_exponent>=0:
+        print("体積:"+str(round_sigdig(volume_solid_or_liquid*10**volume_solid_or_liquid_exponent,significant_figures_number))+"cm^3")
+    elif volume_solid_or_liquid_exponent==1:
+        print("体積:"+str(f"{volume_solid_or_liquid:.{significant_figures_number-1}f}")+"*10cm^3")
+    else:
+        print("体積:"+str(f"{volume_solid_or_liquid:.{significant_figures_number-1}f}")+"*10^"+str(volume_solid_or_liquid_exponent)+"cm^3")
