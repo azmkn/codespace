@@ -56,7 +56,6 @@ for i in range(0,h):
       c=choice(l)
       grid[i][j]=name[c - 1]
       l.remove(c)
-      
 print()
 for i in range(h):
   grid[i]=" ".join(grid[i])
