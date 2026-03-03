@@ -1,7 +1,5 @@
 import pandas as pd
 df=pd.read_excel("../data/sample.xlsx")
-#個人情報保護のため一時名前ではなく出席番号で管理
-#のちにStreamlitに移すつもり
 your_class=input()
 class_dict={'2-8 SS':0, '2-8 MS':1, '2-8':2}
 from random import choice
