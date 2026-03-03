@@ -22,14 +22,11 @@ for i in range(len(name)):
   else:p=str(i+attendance_number_start)
   name[i]=p+"."+name[i]+"  "*(max_name_length-len(name[i]))
 fix_number=class_data['固定人数']
-print(grid)
 if fix_number!=0:
   fix_data=list(map(int,class_data['固定者の番号、位置'].split()))
-  print(fix_data)
 for i in range(fix_number):
   grid[fix_data[3*i+1]-1][fix_data[3*i+2]-1]=name[fix_data[3*i]-attendance_number_start]
   l.remove(fix_data[3*i]-attendance_number_start+1)
-print(grid)
 """no=input().split()
 for i in range(len(no)):
   l.remove(no[i])
@@ -55,15 +52,11 @@ for i in range(0,h):
     if grid[i][j]=="x":
       grid[i][j]="   "+"  "*max_name_length
       continue
-    if len(l)==0:
-      tf=False
-      break
-    c = choice(l)
     if grid[i][j]=="o":
+      c=choice(l)
       grid[i][j]=name[c - 1]
       l.remove(c)
-  if not tf:
-    break
+      
 print()
 for i in range(h):
   grid[i]=" ".join(grid[i])
